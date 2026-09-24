@@ -1,0 +1,11 @@
+llmlingua_previous_sample_utilization_callback:
+  module: "src.callbacks.instance.llmlingua_previous_sample_utilization_callback.LLMLinguaPreviousSampleUtilizationCallback"
+  parameters:
+    original_first_user_prompt: "task.chat_history_item_factory.construct(0, 'user')"  # pseudocode, will not be executed.
+    utilized_sample_count: 3
+    compression_rate: 0.5
+    target_token: -1
+    compressor_model_name: "microsoft/llmlingua-2-xlm-roberta-large-meetingbank"
+    use_llmlingua2: true
+    device: "cpu"
+    force_compression: false

@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the LIMBO paper."
+title: "LIMBO: Lifelong Inference-Time Memory and Budget Optimization for LLM Agents"
+type: software
+version: 0.1.0
+date-released: 2026-09-24
+authors:
+  - family-names: Sharma
+    given-names: Siddharth
+  - family-names: Pandey
+    given-names: Nilesh Prasad
+  - family-names: Gungor
+    given-names: Onat
+  - family-names: Rosing
+    given-names: Tajana
+repository-code: "https://github.com/Sid10july/LIMBO"
+preferred-citation:
+  type: conference-paper
+  title: "LIMBO: Lifelong Inference-Time Memory and Budget Optimization for LLM Agents"
+  authors:
+    - family-names: Sharma
+      given-names: Siddharth
+    - family-names: Pandey
+      given-names: Nilesh Prasad
+    - family-names: Gungor
+      given-names: Onat
+    - family-names: Rosing
+      given-names: Tajana
+  collection-title: "Proceedings of the 38th IEEE International Conference on Tools with Artificial Intelligence"
+  year: 2026

@@ -1,0 +1,4 @@
+fixed_response_agent:
+  module: "src.agents.instance.fixed_response_agent.FixedResponseAgent"
+  parameters:
+    session_history_file_path: "./outputs/example/runs.json"

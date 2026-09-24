@@ -1,0 +1,10 @@
+assignment_config:
+  language_model_list:
+  - name: gpt-4o-mini
+  agent:
+    name: language_model_agent
+    custom_parameters:
+      language_model: gpt-4o-mini
+      inference_config_dict:
+        max_completion_tokens: 512
+        temperature: 0.0

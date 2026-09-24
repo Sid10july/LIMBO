@@ -1,0 +1,15 @@
+retrieval_llmlingua_previous_sample_utilization_callback:
+  module: "src.callbacks.instance.retrieval_llmlingua_previous_sample_utilization_callback.RetrievalLLMLinguaPreviousSampleUtilizationCallback"
+  parameters:
+    original_first_user_prompt: "task.chat_history_item_factory.construct(0, 'user')"  # pseudocode, will not be executed.
+    utilized_sample_count: 64
+    retrieved_sample_count: 16
+    full_replay_sample_count: 16
+    lexical_weight: 0.35
+    skill_weight: 0.50
+    table_weight: 0.15
+    compression_rate: 0.8
+    target_token: -1
+    compressor_model_name: "Qwen/Qwen2.5-3B-Instruct"
+    use_llmlingua2: false
+    device: "cuda"

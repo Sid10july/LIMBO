@@ -1,0 +1,15 @@
+retrieval_previous_sample_utilization_callback:
+  module: "src.callbacks.instance.retrieval_previous_sample_utilization_callback.RetrievalPreviousSampleUtilizationCallback"
+  parameters:
+    original_first_user_prompt: "task.chat_history_item_factory.construct(0, 'user')"  # pseudocode, will not be executed.
+    utilized_sample_count: 64
+    enable_success_cards: false
+    replay_render_mode: "raw"
+    trimmed_result_row_limit: 5
+    trimmed_result_char_limit: 240
+    retrieved_sample_count: 16
+    full_replay_sample_count: 16
+    lexical_weight: 0.35
+    skill_weight: 0.50
+    table_weight: 0.15
+    anchor_weight: 0.0

@@ -1,0 +1,36 @@
+import:
+- ../task.yaml
+- ../../../agent.yaml
+- ../../../../../../definition.yaml
+
+# Retrieval-based replay baseline.
+# Instead of always injecting the 16 most recent successful trajectories,
+# keep a memory bank of 64 successful sessions and retrieve the 16 most
+# relevant demonstrations for the current DBBench question.
+assignment_config:
+  callback_dict:
+    callback_0:
+      name: current_session_saving_callback
+    callback_1:
+      name: consecutive_abnormal_agent_inference_process_handling_callback
+    callback_2:
+      name: retrieval_previous_sample_utilization_callback
+      custom_parameters:
+        utilized_sample_count: 64
+        retrieved_sample_count: 16
+        full_replay_sample_count: 16
+        lexical_weight: 0.35
+        skill_weight: 0.50
+        table_weight: 0.15
+  output_dir: outputs/{TIMESTAMP}
+  sample_order: default
+
+environment_config:
+  use_task_client_flag: false
+
+task_dict:
+  db_bench:
+    parameters:
+      chat_history_item_factory:
+        parameters:
+          chat_history_item_dict_path: ./chat_history_items/previous_sample_utilization/db_bench.json

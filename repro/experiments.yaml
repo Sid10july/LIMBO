@@ -1,0 +1,153 @@
+version: 1
+experiments:
+  qwen-db-no-replay:
+    description: Qwen 2.5 7B, DBBench, no replay
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/db_bench/instance/standard.yaml
+    args: []
+
+  qwen-db-fixed-k16:
+    description: Qwen 2.5 7B, DBBench, fixed recent replay (k=16)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/db_bench/instance/previous_sample_utilization_usc16.yaml
+    args: []
+
+  qwen-db-retrieval-k16:
+    description: Qwen 2.5 7B, DBBench, retrieval replay (memory=64, k=16)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/db_bench/instance/retrieval_mem64_top16.yaml
+    args: []
+
+  qwen-db-longllmlingua-k16:
+    description: Qwen 2.5 7B, DBBench, LongLLMLingua replay (k=16)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/db_bench/instance/longllmlingua_usc16.yaml
+    args: []
+
+  qwen-db-gsc-k1:
+    description: Qwen 2.5 7B, DBBench, LAB group self-consistency (usc=1)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/db_bench/instance/group_self_consistency_gc1_scpg1.yaml
+    args: []
+
+  qwen-db-limbo:
+    description: Qwen 2.5 7B, DBBench, LIMBO retrieval-gated controller
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/db_bench/instance/retrieval_mem64_top8_trimmed_trace.yaml
+    args: &limbo_args
+      - --enable_general_bandit
+      - --bandit_two_head
+      - --bandit_retrieval_gated
+      - --bandit_feature_subset
+      - bias,prompt_scaffold_tokens,skill_count,running_cost_ema_normalized,previous_sample_cost_normalized,recent_task_limit_rate,retrieved_example_count,top1_similarity_score,avg_similarity_score,avg_rounds_in_retrieved,avg_cost_in_retrieved
+      - --bandit_alpha
+      - "0.5"
+      - --bandit_lambda
+      - "0.12"
+      - --bandit_budget_target
+      - "0.000688"
+      - --bandit_lambda_lr
+      - "0.10"
+      - --bandit_adaptive_lambda
+      - --bandit_allow_max_arm
+      - --bandit_disallow_lowest_arm
+
+  qwen-os-no-replay:
+    description: Qwen 2.5 7B, OS Interaction, no replay
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/os_interaction/instance/standard.yaml
+    args: []
+
+  qwen-os-fixed-trim-k1:
+    description: Qwen 2.5 7B, OS Interaction, fixed trimmed replay (k=1)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/os_interaction/instance/previous_sample_utilization_usc1_trimmed_trace.yaml
+    args: []
+
+  qwen-os-retrieval-k4:
+    description: Qwen 2.5 7B, OS Interaction, retrieval replay (memory=64, k=4)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/os_interaction/instance/retrieval_mem64_top4_trimmed_trace_v2.yaml
+    args: []
+
+  qwen-os-longllmlingua-k1:
+    description: Qwen 2.5 7B, OS Interaction, LongLLMLingua replay (k=1)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/os_interaction/instance/longllmlingua_usc1.yaml
+    args: []
+
+  qwen-os-gsc-k1:
+    description: Qwen 2.5 7B, OS Interaction, LAB group self-consistency (usc=1)
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/os_interaction/instance/group_self_consistency_gc1_scpg1.yaml
+    args: []
+
+  qwen-os-limbo:
+    description: Qwen 2.5 7B, OS Interaction, LIMBO controller
+    config: configs/assignments/experiments/qwen25_7b_instruct/instance/os_interaction/instance/retrieval_mem64_top1_trimmed_trace_v2.yaml
+    args: *limbo_args
+
+  llama-db-no-replay:
+    description: Llama 3.1 8B, DBBench, no replay
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/db_bench/instance/standard.yaml
+    args: []
+
+  llama-db-fixed-k16:
+    description: Llama 3.1 8B, DBBench, fixed recent replay (k=16)
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/db_bench/instance/previous_sample_utilization_usc16.yaml
+    args: []
+
+  llama-db-longllmlingua-k16:
+    description: Llama 3.1 8B, DBBench, LongLLMLingua replay (k=16)
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/db_bench/instance/longllmlingua_usc16.yaml
+    args: []
+
+  llama-db-gsc-k1:
+    description: Llama 3.1 8B, DBBench, LAB group self-consistency (usc=1)
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/db_bench/instance/group_self_consistency_gc1_scpg1.yaml
+    args: []
+
+  llama-os-no-replay:
+    description: Llama 3.1 8B, OS Interaction, no replay
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/os_interaction/instance/standard.yaml
+    args: []
+
+  llama-os-fixed-k1:
+    description: Llama 3.1 8B, OS Interaction, fixed recent replay (k=1)
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/os_interaction/instance/previous_sample_utilization_usc1.yaml
+    args: []
+
+  llama-os-longllmlingua-k1:
+    description: Llama 3.1 8B, OS Interaction, LongLLMLingua replay (k=1)
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/os_interaction/instance/longllmlingua_usc1.yaml
+    args: []
+
+  llama-os-gsc-k1:
+    description: Llama 3.1 8B, OS Interaction, LAB group self-consistency (usc=1)
+    config: configs/assignments/experiments/llama_31_8b_instruct/instance/os_interaction/instance/group_self_consistency_gc1_scpg1.yaml
+    args: []
+
+  gpt-db-no-replay:
+    description: GPT-4o mini, DBBench, no replay
+    requires_env: OPENAI_API_KEY
+    config: configs/assignments/experiments/gpt_4o_mini/instance/db_bench/instance/standard.yaml
+    args: []
+
+  gpt-db-longllmlingua-k16:
+    description: GPT-4o mini, DBBench, LongLLMLingua replay (k=16)
+    requires_env: OPENAI_API_KEY
+    config: configs/assignments/experiments/gpt_4o_mini/instance/db_bench/instance/longllmlingua_usc16.yaml
+    args: []
+
+  gpt-db-gsc-k1:
+    description: GPT-4o mini, DBBench, LAB group self-consistency (usc=1)
+    requires_env: OPENAI_API_KEY
+    config: configs/assignments/experiments/gpt_4o_mini/instance/db_bench/instance/group_self_consistency_gc1_scpg1.yaml
+    args: []
+
+  gpt-os-no-replay:
+    description: GPT-4o mini, OS Interaction, no replay
+    requires_env: OPENAI_API_KEY
+    config: configs/assignments/experiments/gpt_4o_mini/instance/os_interaction/instance/standard.yaml
+    args: []
+
+  gpt-os-longllmlingua-k1:
+    description: GPT-4o mini, OS Interaction, LongLLMLingua replay (k=1)
+    requires_env: OPENAI_API_KEY
+    config: configs/assignments/experiments/gpt_4o_mini/instance/os_interaction/instance/longllmlingua_usc1.yaml
+    args: []
+
+  gpt-os-gsc-k1:
+    description: GPT-4o mini, OS Interaction, LAB group self-consistency (usc=1)
+    requires_env: OPENAI_API_KEY
+    config: configs/assignments/experiments/gpt_4o_mini/instance/os_interaction/instance/group_self_consistency_gc1_scpg1.yaml
+    args: []

@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  release-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install lightweight test dependencies
+        run: python -m pip install pyyaml
+      - name: Compile release utilities
+        run: python -m compileall -q repro scripts src
+      - name: Validate experiment manifest
+        run: python -m unittest tests.test_repro_runner
+      - name: List release commands
+        run: python repro/run.py --list

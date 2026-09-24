@@ -1,0 +1,41 @@
+import:
+- ../task.yaml
+- ../../../agent.yaml
+- ../../../../../../definition.yaml
+
+# OS retrieval replay V2b:
+# - deterministic trimmed-trace injection
+# - OS-specific retrieval anchor tokens from instructions + initialization scripts
+# - same memory bank / top-1 injection for clean comparison with V1/V2a
+assignment_config:
+  callback_dict:
+    callback_0:
+      name: current_session_saving_callback
+    callback_1:
+      name: consecutive_abnormal_agent_inference_process_handling_callback
+    callback_2:
+      name: retrieval_previous_sample_utilization_callback
+      custom_parameters:
+        utilized_sample_count: 64
+        retrieved_sample_count: 1
+        full_replay_sample_count: 1
+        lexical_weight: 0.45
+        skill_weight: 0.35
+        table_weight: 0.00
+        anchor_weight: 0.20
+        enable_success_cards: false
+        replay_render_mode: trimmed_trace
+        trimmed_result_row_limit: 5
+        trimmed_result_char_limit: 240
+  output_dir: outputs/{TIMESTAMP}
+  sample_order: default
+
+environment_config:
+  use_task_client_flag: false
+
+task_dict:
+  os_interaction:
+    parameters:
+      chat_history_item_factory:
+        parameters:
+          chat_history_item_dict_path: ./chat_history_items/previous_sample_utilization/os_interaction.json
